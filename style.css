@@ -1,0 +1,304 @@
+/* =========================
+   RESET & BASE
+========================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* =========================
+   COLOR SYSTEM
+========================= */
+:root {
+  --bg: #0b0f1a;
+  --bg-soft: rgba(255, 255, 255, 0.06);
+  --card: rgba(255, 255, 255, 0.08);
+  --border: rgba(255, 255, 255, 0.15);
+  --text: #f8fafc;
+  --muted: #cbd5e1;
+
+  --accent: #c89b6c;
+  --accent-soft: rgba(200, 155, 108, 0.15);
+
+  --shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+}
+
+/* LIGHT MODE */
+body.light {
+  --bg: #f8fafc;
+  --bg-soft: rgba(0, 0, 0, 0.04);
+  --card: rgba(255, 255, 255, 0.9);
+  --border: rgba(0, 0, 0, 0.08);
+  --text: #0f172a;
+  --muted: #475569;
+
+  --accent: #8b5e34;
+  --accent-soft: rgba(139, 94, 52, 0.12);
+
+  --shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+}
+
+/* =========================
+   BODY
+========================= */
+body {
+  background: radial-gradient(
+      circle at top,
+      rgba(200, 155, 108, 0.08),
+      transparent 40%
+    ),
+    var(--bg);
+  color: var(--text);
+  transition: all 0.4s ease;
+}
+
+/* =========================
+   HEADER / NAVBAR
+========================= */
+header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 16px 48px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-soft);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  z-index: 999;
+}
+
+header h1 {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+header button {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: linear-gradient(135deg, var(--accent), #e6c39b);
+  color: #0b0f1a;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+header button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px var(--accent-soft);
+}
+
+/* =========================
+   SECTION
+========================= */
+section {
+  padding: 120px 40px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+/* =========================
+   HERO
+========================= */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.hero h2 {
+  font-size: 52px;
+  line-height: 1.15;
+  letter-spacing: -1px;
+}
+
+.hero span {
+  background: linear-gradient(135deg, var(--accent), #f5d7b2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero p {
+  margin-top: 24px;
+  max-width: 620px;
+  font-size: 16px;
+  color: var(--muted);
+}
+
+/* =========================
+   CARD & GRID
+========================= */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 28px;
+  margin-top: 32px;
+}
+
+.card {
+  background: var(--card);
+  backdrop-filter: blur(18px);
+  border: 1px solid var(--border);
+  padding: 28px;
+  border-radius: 20px;
+  margin-top: 24px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: all 0.35s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(255, 255, 255, 0.08),
+    transparent
+  );
+  opacity: 0;
+  transition: 0.4s;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card:hover {
+  transform: translateY(-10px) scale(1.02);
+}
+
+/* =========================
+   MODAL SKILL
+========================= */
+.modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal.show {
+  display: flex;
+  opacity: 1;
+}
+
+.modal-content {
+  background: var(--card);
+  backdrop-filter: blur(18px);
+  border: 1px solid var(--border);
+  padding: 32px;
+  border-radius: 20px;
+  max-width: 440px;
+  width: 90%;
+  text-align: left;
+  font-size: 16px;
+  line-height: 1.6;
+  box-shadow: var(--shadow);
+  position: relative;
+  transform: translateY(-20px);
+  opacity: 0;
+  transition: all 0.3s ease;
+}
+
+.modal.show .modal-content {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.modal-content h3 {
+  color: var(--accent);
+  margin-bottom: 12px;
+  text-align: center;
+}
+
+.modal-content button {
+  margin-top: 20px;
+  padding: 10px 22px;
+  border: none;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #0b0f1a;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  transition: 0.3s ease;
+}
+
+.modal-content button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px var(--accent-soft);
+}
+
+/* =========================
+   CONTACT GRID
+========================= */
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.contact-grid .card {
+  display: block;
+  text-align: center;
+  padding: 28px;
+  border-radius: 16px;
+  background: var(--card);
+  color: var(--text);
+  text-decoration: none;
+  transition: all 0.35s ease;
+  cursor: pointer;
+}
+
+.contact-grid .card:hover {
+  transform: translateY(-8px) scale(1.02);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+/* =========================
+   FOOTER
+========================= */
+footer {
+  text-align: center;
+  padding: 48px 20px;
+  color: var(--muted);
+  font-size: 14px;
+  border-top: 1px solid var(--border);
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 768px) {
+  header {
+    padding: 14px 24px;
+  }
+
+  .hero h2 {
+    font-size: 36px;
+  }
+
+  section {
+    padding: 100px 24px;
+  }
+}
